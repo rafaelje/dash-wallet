@@ -18,26 +18,19 @@
 package de.schildbach.wallet.ui;
 
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
 import android.support.v4.content.AsyncTaskLoader;
-import android.support.v4.content.LocalBroadcastManager;
 
 import org.bitcoinj.core.MasternodeManager;
+import org.bitcoinj.core.MasternodeManagerListener;
 import org.bitcoinj.core.MasternodeSync;
 import org.bitcoinj.core.MasternodeSyncListener;
-import org.bitcoinj.core.MasternodeManagerListener;
-import org.bitcoinj.wallet.Wallet;
 import org.bitcoinj.utils.Threading;
+import org.bitcoinj.wallet.Wallet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.RejectedExecutionException;
-
-import de.schildbach.wallet.WalletApplication;
-import de.schildbach.wallet.util.ThrottlingWalletChangeListener;
 
 /**
  * @author Andreas Schildbach
@@ -114,7 +107,7 @@ public final class MasternodeSyncLoader extends AsyncTaskLoader<Integer>
 	private final MasternodeSyncListener masternodeSyncListener = new MasternodeSyncListener()
 	{
 		@Override
-		public void onSyncStatusChanged(int newStatus)
+		public void onSyncStatusChanged(int newStatus, double syncStatus)
 		{
 			masternodeSyncStatus = newStatus;
 			safeForceLoad();

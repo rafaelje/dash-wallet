@@ -20,12 +20,10 @@ package de.schildbach.wallet.ui;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 
-
 import org.bitcoinj.core.MasternodeManager;
 import org.bitcoinj.core.MasternodeManagerListener;
 import org.bitcoinj.core.MasternodeSync;
 import org.bitcoinj.core.MasternodeSyncListener;
-import org.bitcoinj.wallet.Wallet;
 import org.bitcoinj.utils.Threading;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,7 +98,7 @@ public final class MasternodeLoader extends AsyncTaskLoader<Integer>
 	private final MasternodeSyncListener masternodeSyncListener = new MasternodeSyncListener()
 	{
 		@Override
-		public void onSyncStatusChanged(int newStatus)
+		public void onSyncStatusChanged(int newStatus, double syncStatus)
 		{
 			masternodeSyncStatus = newStatus;
 			safeForceLoad();
